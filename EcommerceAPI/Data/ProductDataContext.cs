@@ -1,0 +1,30 @@
+﻿using EcommerceAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+
+namespace EcommerceAPI.Data
+{
+    public class ProductDataContext:DbContext
+    {
+        public ProductDataContext(DbContextOptions<ProductDataContext> options):base(options)
+        {
+            
+        }
+
+        public DbSet<Product> products { get; set; }
+        public DbSet<Catagory> categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Catagory)
+                .WithMany(c => c.Products)
+                .HasForeignKey(c => c.CategoryId);
+
+            modelBuilder.Entity<Catagory>()
+                .HasMany(c => c.Products)
+                .WithOne(p => p.Catagory);
+        }
+    }
+}

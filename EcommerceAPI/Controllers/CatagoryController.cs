@@ -31,6 +31,7 @@ namespace EcommerceAPI.Controllers
         [HttpGet]
         public IActionResult GetAllWithProduct()
         {
+        
             //var catagory = (from cata in _productDataContext.categories
             //                join prod in _productDataContext.products
             //                on cata.CategoryId equals prod.CategoryId
@@ -46,7 +47,7 @@ namespace EcommerceAPI.Controllers
                           on cata.CategoryId equals prod.CategoryId 
                           into GroupJoin select new 
                           {
-                              CateId = cata.CategoryId,
+                              CategroyId = cata.CategoryId,
                               CateName = cata.CategoryName,
                               ProdProduct = cata.Products
                           }).ToList();

@@ -50,7 +50,7 @@ namespace EcommerceAPI.Controllers
                               CateName = cata.CategoryName,
                               ProdProduct = cata.Products
                           }).ToList();
-            //Nothing to say About Linq
+            
             // var catagory = _productDataContext.categories.Select(x => x.Products).ToList();
             return Ok(categroy);
         }

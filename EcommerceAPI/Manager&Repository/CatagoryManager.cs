@@ -16,9 +16,9 @@ namespace EcommerceAPI.Manager_Repository
         {
             return GetFirstOrDefault(x => x.CategoryId == id);
         }
-        public List<Catagory> GetByName(string Name)
+        public ICollection<Catagory> GetByName(string Name)
         {
-            return (List<Catagory>)Get(c => c.CategoryName.ToLower() == Name.ToLower());
+            return Get(c => c.CategoryName.ToLower().Contains(Name.ToLower()));
         }
     }
 }

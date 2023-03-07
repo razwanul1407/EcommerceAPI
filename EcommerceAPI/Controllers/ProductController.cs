@@ -1,6 +1,5 @@
 ﻿using EcommerceAPI.Data;
 using EcommerceAPI.Manager_Repository;
-using EcommerceAPI.Migrations;
 using EcommerceAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -77,17 +76,23 @@ namespace EcommerceAPI.Controllers
             return Ok(prod);
         }
 
-        [HttpPut]
-        public ActionResult<Product> Update(Product product)
+        [HttpPut] ///error
+        public ActionResult<Product> Update(int id , Product product)
         {
-            if (product.ProductId == 0)
+            var pprod = _productManager.GetById(id);
+
+            if (pprod == null)
             {
-                return BadRequest("Not Found Product");
+                return NotFound();
             }
+            //if (cprod.ProductId == 0)
+            //{
+            //    return BadRequest("Not Found Product");
+            //}
             bool prod = _productManager.Update(product);
             if (prod)
             {
-                return Ok(product);
+                return Ok(product.ProductName);
             }
             return BadRequest("Not Update");
         }

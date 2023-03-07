@@ -6,6 +6,6 @@ namespace EcommerceAPI.IManager_IRepository
     public interface ICatagoryManager:ICommonManager<Catagory>
     {
         Catagory GetById(int id);
-        List<Catagory> GetByName(string Name);
+        ICollection<Catagory> GetByName(string Name);
     }
 }

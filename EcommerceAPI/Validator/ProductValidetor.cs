@@ -8,8 +8,8 @@ namespace EcommerceAPI.Validator
         public ProductValidetor()
         {
             RuleFor(p => p.ProductName).NotNull().NotEmpty()
-                .MinimumLength(5).MaximumLength(10)
-                .WithMessage("Enter Valid ProductName");
+                    .MinimumLength(5).MaximumLength(10)
+                    .WithMessage("Enter Valid ProductName");
 
             RuleFor(p => p.CategoryId).NotNull().NotEmpty()
                 .WithMessage("Enter Valid Catagory Id");

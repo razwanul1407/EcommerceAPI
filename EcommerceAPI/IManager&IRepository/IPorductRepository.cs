@@ -4,7 +4,7 @@ using EF.Core.Repository.Repository;
 
 namespace EcommerceAPI.IManager_IRepository
 {
-    public interface IPorductRepository:ICommonRepository<Product>
+    public interface IPorductRepository : ICommonRepository<Product>
     {
     }
 }

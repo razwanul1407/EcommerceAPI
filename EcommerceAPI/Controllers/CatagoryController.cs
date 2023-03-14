@@ -1,12 +1,15 @@
 ﻿using EcommerceAPI.Data;
 using EcommerceAPI.Manager_Repository;
 using EcommerceAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using System.Data;
 using System.Linq; 
 
 namespace EcommerceAPI.Controllers
 {
+    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class CatagoryController : ControllerBase
@@ -21,6 +24,8 @@ namespace EcommerceAPI.Controllers
             _catagoryManager = new CatagoryManager(dataContext);
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -28,6 +33,7 @@ namespace EcommerceAPI.Controllers
             return Ok(cata);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult GetAllWithProduct()
         {
@@ -56,6 +62,7 @@ namespace EcommerceAPI.Controllers
             return Ok(categroy);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult<Catagory> GetById(int id)
         {
@@ -67,6 +74,7 @@ namespace EcommerceAPI.Controllers
             return Ok(prod);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult<Catagory> GetByName(string Name)
         {
@@ -74,6 +82,7 @@ namespace EcommerceAPI.Controllers
             return Ok(prod);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<Catagory> Add(Catagory category)
         {
@@ -85,6 +94,7 @@ namespace EcommerceAPI.Controllers
             return Ok(cata);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public ActionResult<Catagory> Update(Catagory catagory)
         {
@@ -99,7 +109,7 @@ namespace EcommerceAPI.Controllers
             }
             return BadRequest("Not Update");
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpDelete]
         public ActionResult<Catagory> Delete(int id)
         {

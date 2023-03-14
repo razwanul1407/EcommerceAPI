@@ -1,14 +1,19 @@
 ﻿using EcommerceAPI.Data;
 using EcommerceAPI.Manager_Repository;
 using EcommerceAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Identity.Client;
+using System.Data;
 
 namespace EcommerceAPI.Controllers
 {
+
+    [Authorize(Roles = "Admin,SuperAdmin")]
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -77,18 +82,18 @@ namespace EcommerceAPI.Controllers
         }
 
         [HttpPut] ///error
-        public ActionResult<Product> Update(int id , Product product)
+        public ActionResult<Product> Update(Product product)
         {
-            var pprod = _productManager.GetById(id);
+           // var cprod = _productManager.GetById(id);
 
-            if (pprod == null)
-            {
-                return NotFound();
-            }
-            //if (cprod.ProductId == 0)
+            //if (pprod == null)
             //{
-            //    return BadRequest("Not Found Product");
+            //    return NotFound();
             //}
+            if (product.ProductId == 0)
+            {
+                return BadRequest("Not Found Product");
+            }
             bool prod = _productManager.Update(product);
             if (prod)
             {
@@ -125,9 +130,11 @@ namespace EcommerceAPI.Controllers
         //                       ProductId = prod.ProductId,
         //                       ProductName = prod.ProductName,
         //                       CategoryId = cata.CategoryId,
-        //                      CategoryName = cata.CategoryName,
+        //                     //  CategoryName = cata.CategoryName,
         //                   });
         //    return product.ToList();
         //}
+
+
     }
 }
